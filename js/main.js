@@ -2,10 +2,8 @@ let taskCounter = 0;
 
 let btn = document.getElementById('btn-add-task');
 
-btn.addEventListener("click", addTask);
+btn.addEventListener("click", function () {
 
-
-function addTask() {
     let li = document.createElement("li");
     li.className = "list-group-item d-flex justify-content-between align-items-start";
     let span = document.createElement("span");
@@ -27,13 +25,16 @@ function addTask() {
     li.appendChild(span); //Agrego el span dentro del li
     taskCounter++;
     li.appendChild(deleteButton);
-    countTask.textContent = "Number of tasks : " + taskCounter;
+    countTask.textContent = `Cantidad de Tareas : ${taskCounter}  `;  // Template Literals
     taskList.appendChild(li);
     taskInput.value = "";
     taskInput.focus();
     deleteButton.addEventListener('click', function () {
-        taskCounter--;
-        countTask.textContent = "Number of tasks : " + taskCounter;
-         taskList.removeChild(li);
+
+        if (confirm("¿Estás seguro de que quieres eliminar esta tarea?")) {
+            taskCounter--;
+            countTask.textContent = "Number of tasks : " + taskCounter;
+            taskList.removeChild(li);
+        }
     });
-}
+});
